@@ -2,7 +2,7 @@
  * Main JavaScript for handling Chromecast interactions.
  */
 
-var applicationID = 'C91E57F7';
+var applicationID = 'D3968249';
 var namespace = 'urn:x-cast:com.emabiz.chromecast-dashboard';
 var session = null;
 
@@ -11,7 +11,9 @@ if (!chrome.cast || !chrome.cast.isAvailable) {
 }
 
 function initializeCastApi() {
+  console.log('initializeCastApi',applicationID);
   var sessionRequest = new chrome.cast.SessionRequest(applicationID);
+  console.log('sessionRequest',sessionRequest);
   var apiConfig = new chrome.cast.ApiConfig(sessionRequest,
     sessionListener,
     receiverListener);
@@ -89,19 +91,3 @@ function connect() {
 }
 
 $('#kill').on('click', stopApp);
-
-// Populate input fields from query params
-$(function () {
-  if (!'URLSearchParams' in window) {
-    return;
-  }
-
-  var params = new URLSearchParams(window.location.search);
-  if (params.has('url')) {
-    $('#url').val(params.get('url'));
-  }
-
-  if (params.has('refresh')) {
-    $('#refresh').val(params.get('refresh'));
-  }
-});
