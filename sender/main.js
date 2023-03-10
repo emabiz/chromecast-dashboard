@@ -65,7 +65,9 @@ function sendMessage(message) {
     session.sendMessage(namespace, message, onSuccess.bind(this, message), onError);
   }
   else {
+    console.log('requestSession');
     chrome.cast.requestSession(function(e) {
+      console.log('requestSession callback');
       session = e;
       sessionListener(e);
       session.sendMessage(namespace, message, onSuccess.bind(this, message), onError);
